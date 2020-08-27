@@ -97,12 +97,8 @@ public class Application {
             Afkomst afkomst = reversePlayback.pop();
             Wegdek wegdek = afkomst.getWegdek();
             Voertuig voertuig = afkomst.getVoertuig();
-            //Hierzo insert je de voertuig terug in de wegdek. Precies zoals je ze in het begin hebt gedaan toen je de auto's aanmaakte en op de straten plaatste
-            //Voorbeeld
-            //wegdek.insert(voertuig); // wegdek kan bijvoorbeeld zijn oost, west, zuid of noord.
-            //of wegdek.enqueue(voertuig)
-            //je kan loopen er over , zoals dit
-            System.out.println("voertuig " + voertuig.toString() + " gaat terug in " + wegdek.toString());
+            wegdek.getVoertuigenQueue().insert(voertuig);//zet de auto's terug in hun wegdek.
+            System.out.println("voertuig " + voertuig.toString() + " gaat terug in " + wegdek.toString());//Vertoont ze op basis van reverse order
         }
     }
 

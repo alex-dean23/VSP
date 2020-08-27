@@ -2,17 +2,18 @@ package model;
 
 import dstructures.LinkStack;
 import dstructures.Queue;
+import dstructures.Stack;
 
 
 public class Wegdek {
 
     private String wegdekCode;
     private Queue voertuigenQueue;
-    private LinkStack reverseVoertuigen;
+    private Stack reverseVoertuigen;
 
     public Wegdek(Queue voertuigenQueue, String wegdekCode) {
         this.voertuigenQueue = voertuigenQueue;
-        this.reverseVoertuigen = new LinkStack();
+        this.reverseVoertuigen = new Stack();
         this.wegdekCode = wegdekCode;
     }
 
@@ -24,13 +25,9 @@ public class Wegdek {
         this.voertuigenQueue = voertuigenQueue;
     }
 
-    public LinkStack getReverseVoertuigen() {
+    public Stack getReverseVoertuigen() {
         return reverseVoertuigen;
     }
-    public void setReverseVoertuigen(LinkStack reverseVoertuigen) {
-        this.voertuigenQueue = voertuigenQueue;
-    }
-
 
     public String getWegdekCode() {
         return wegdekCode;
@@ -38,6 +35,15 @@ public class Wegdek {
 
     public void setWegdekCode(String wegdekCode) {
         this.wegdekCode = wegdekCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Wegdek{" +
+                "wegdekCode='" + wegdekCode + '\'' +
+                ", voertuigenQueue=" + voertuigenQueue +
+                ", reverseVoertuigen=" + reverseVoertuigen +
+                '}';
     }
 }
 
