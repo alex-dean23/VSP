@@ -5,9 +5,12 @@ public class Afkomst {
     public Voertuig voertuig;
     public Wegdek wegdek;
 
-    Voertuig voertuig = new Voertuig ();
-    voertuig.setVoertuig("autoNumr" , "kentNunr", wegdekCode )
-
-
-    Wegdek wegdek = new wegdek ();
-    Wegdek.setWegdek("wegdekCode ", reverseVoertuigen)
+    public Afkomst(Wegdek wegdek, Voertuig voertuig)
+{
+ this.wegdek = wegdek;
+ this.voertuig = voertuig;
+}
+    
+    public Voertuig getVoertuig(){return voertuig;}
+    public Wegdek getWegdek(){return wegdek;}
+    
