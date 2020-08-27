@@ -3,16 +3,16 @@ package dstructures;
 public class Stack {
   
   private int stackSize;
-    private int[] stackArr;
+    private Afkomst[] stackArr;
     private int top;
  
     /**
      * constructor to create stack with size
      * @param size
      */
-    public MyDynamicStack(int size) {
+    public Stack() {
         this.stackSize = size;
-        this.stackArr = new int[stackSize];
+        this.stackArr = new Afkomst[100];
         this.top = -1;
     }
  
@@ -22,7 +22,7 @@ public class Stack {
      * @param entry
      * @throws Exception 
      */
-    public void push(int entry){
+    public void push(Afkomst entry){
         if(this.isStackFull()){
             System.out.println(("Stack is full. Increasing the capacity."));
             this.increaseStackCapacity();
@@ -37,11 +37,11 @@ public class Stack {
      * @return
      * @throws Exception 
      */
-    public int pop() throws Exception {
+    public Afkomst pop() throws Exception {
         if(this.isStackEmpty()){
             throw new Exception("Stack is empty. Can not remove element.");
         }
-        int entry = this.stackArr[top--];
+        Afkomst entry = this.stackArr[top--];
         System.out.println("Removed entry: "+entry);
         return entry;
     }
@@ -51,13 +51,13 @@ public class Stack {
      * without removing it.
      * @return
      */
-    public long peek() {
+    public Afkomst peek() {
         return stackArr[top];
     }
  
     private void increaseStackCapacity(){
          
-        int[] newStack = new int[this.stackSize*2];
+        Afkomst[] newStack = new Afkomst[this.stackSize*2];
         for(int i=0;i<stackSize;i++){
             newStack[i] = this.stackArr[i];
         }
