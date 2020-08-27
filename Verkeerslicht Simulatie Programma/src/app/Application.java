@@ -2,6 +2,8 @@ package app;
 
 import dstructures.LinkStack;
 import dstructures.Queue;
+import dstructures.Stack;
+import model.Afkomst;
 import model.Voertuig;
 import model.Wegdek;
 import service.Service;
@@ -16,7 +18,7 @@ public class Application {
     static Wegdek west;
     static Queue prioriteitsVoertuigen;
     static Queue reversePrioriteitsVoertuigen;
-    static LinkStack reversePlayback;
+    static Stack reversePlayback;
 
     public void init() {
         Queue voertuigQueN = new Queue(service.insertNoord());
@@ -33,33 +35,33 @@ public class Application {
     public void priorityQueInit() {
         prioriteitsVoertuigen = new Queue();
         reversePrioriteitsVoertuigen = new Queue();
-        reversePlayback = new LinkStack();
+        reversePlayback = new Stack();
         while (noord.getVoertuigenQueue().peekFirst().getPrNumr() < 3) {
             Voertuig voertuig = noord.getVoertuigenQueue().remove();
             prioriteitsVoertuigen.insert(voertuig);
             reversePrioriteitsVoertuigen.insert(voertuig);
-            reversePlayback.push(voertuig);
+            reversePlayback.push(new Afkomst(noord, voertuig));
         }
 
         while (zuid.getVoertuigenQueue().peekFirst().getPrNumr() < 3) {
             Voertuig voertuig = zuid.getVoertuigenQueue().remove();
             prioriteitsVoertuigen.insert(voertuig);
             reversePrioriteitsVoertuigen.insert(voertuig);
-            reversePlayback.push(voertuig);
+            reversePlayback.push(new Afkomst(zuid, voertuig));
         }
 
         while (oost.getVoertuigenQueue().peekFirst().getPrNumr() < 3) {
             Voertuig voertuig = oost.getVoertuigenQueue().remove();
             prioriteitsVoertuigen.insert(voertuig);
             reversePrioriteitsVoertuigen.insert(voertuig);
-            reversePlayback.push(voertuig);
+            reversePlayback.push(new Afkomst(oost, voertuig));
         }
 
         while (west.getVoertuigenQueue().peekFirst().getPrNumr() < 3) {
             Voertuig voertuig = west.getVoertuigenQueue().remove();
             prioriteitsVoertuigen.insert(voertuig);
             reversePrioriteitsVoertuigen.insert(voertuig);
-            reversePlayback.push(voertuig);
+            reversePlayback.push(new Afkomst(west, voertuig));
         }
     }
 
@@ -88,6 +90,20 @@ public class Application {
         zuid = service.oprijden(zuid);
         oost = service.oprijden(oost);
         west = service.oprijden(west);
+    }
+
+    public void playBack(){
+        while(!reversePlayback.isStackEmpty()){
+            Afkomst afkomst = reversePlayback.pop();
+            Wegdek wegdek = afkomst.getWegdek();
+            Voertuig voertuig = afkomst.getVoertuig();
+            //Hierzo insert je de voertuig terug in de wegdek. Precies zoals je ze in het begin hebt gedaan toen je de auto's aanmaakte en op de straten plaatste
+            //Voorbeeld
+            //wegdek.insert(voertuig); // wegdek kan bijvoorbeeld zijn oost, west, zuid of noord.
+            //of wegdek.enqueue(voertuig)
+            //je kan loopen er over , zoals dit
+            System.out.println("voertuig " + voertuig.toString() + " gaat terug in " + wegdek.toString());
+        }
     }
 
     public static void main(String[] args) {
@@ -122,9 +138,6 @@ public class Application {
                 reversePrioriteitsVoertuigen.remove();
             }
         }
-        reversePlayback.pop();
-
-
     }
 }
 

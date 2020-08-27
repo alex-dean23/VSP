@@ -22,9 +22,9 @@ public class Stack {
         this.stackArr[++top] = entry;
     }
 
-    public Afkomst pop() throws Exception {
+    public Afkomst pop() {
         if(this.isStackEmpty()){
-            throw new Exception("Stack is empty. Can not remove element.");
+            throw new UnsupportedOperationException("Stack is empty. Can not remove element.");
         }
         Afkomst entry = this.stackArr[top--];
         System.out.println("Removed entry: "+entry);
